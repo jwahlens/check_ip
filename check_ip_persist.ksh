@@ -42,7 +42,7 @@ function get_new_ip {
 
     #Currently it checks that get_ip does not fail and the returned value is not blank.
     if [[ $? -ne 0 || -z $ipchk ]]; then
-      print IP address aquisition failed. Trying again in $sleep_time seconds.
+      print $(date) -- IP address aquisition failed. Trying again in $sleep_time seconds.
       sleep $sleep_time
 
     else
@@ -56,9 +56,9 @@ function get_new_ip {
       if expr "$ipchk" : '[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*$' >/dev/null; then
         haveip=1
       else
-        print IP value returned is: $ipchk
-	print This fails validation, trying again in $sleep_time seconds.
-	print This is probably a transient network error.
+        print $(date) -- IP value returned is: $ipchk
+	print "                               This fails validation, trying again in $sleep_time seconds."
+	print "                               This is probably a transient network error."
 	sleep $sleep_time
       fi
     fi
@@ -79,7 +79,7 @@ function poll_for_ip_change {
 
     get_new_ip
     if [ "$new_ip" != "$current_ip" ]; then
-      print IP address has changed from $current_ip to $new_ip.
+    print $(date) -- IP address has changed from $current_ip to $new_ip.
       current_ip=$new_ip
       send_alert
       ip_change=1
