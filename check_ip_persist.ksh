@@ -2,8 +2,8 @@
 
 # Set the polling rate, email list and world name.
 sleep_time=600
-emails="froodwithtowel@gmail.com,peskowron@gmail.com"
-debug_emails="froodwithtowel@gmail.com"
+emails="example@email.com,example2@email.com"
+debug_emails="example@email.com"
 #emails=$debug_emails
 worldname="The Land of Cheese and Syrup"
 ip_savefile=$PWD/last_good_ip.dat
