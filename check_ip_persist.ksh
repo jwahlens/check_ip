@@ -7,6 +7,7 @@ debug_emails="example@email.com"
 #emails=$debug_emails
 worldname="The Land of Cheese and Syrup"
 ip_savefile=$PWD/last_good_ip.dat
+emails_file=$PWD/alert_email_recipients.dat
 
 # Set to "on" for debug
 debug_messages="off"
@@ -81,7 +82,6 @@ function poll_for_ip_change {
     if [ "$new_ip" != "$current_ip" ]; then
     print $(date) -- IP address has changed from $current_ip to $new_ip.
       current_ip=$new_ip
-      send_alert
       ip_change=1
       print $current_ip > $ip_savefile
     else
@@ -97,6 +97,10 @@ function poll_for_ip_change {
 
 # Send an alert to the emails list
 function send_alert {
+
+if [[ -e "$emails_file" ]]; then
+  emails=$(cat $emails_file)
+fi
 
 if [ "$debug_messages" = "on" ]; then
 print Sending out the following message to $emails :
@@ -134,6 +138,7 @@ function main {
   while [ 1 ]; do
     poll_for_ip_change || break
     send_alert || break
+    sleep 10
   done
 }
 
