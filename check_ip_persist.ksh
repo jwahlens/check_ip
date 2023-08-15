@@ -134,11 +134,12 @@ function main {
     get_new_ip
     current_ip=$new_ip
     print $current_ip > $ip_savefile
+    sleep $sleep_time
   fi
   while [ 1 ]; do
     poll_for_ip_change || break
     send_alert || break
-    sleep 10
+    sleep $sleep_time
   done
 }
 
