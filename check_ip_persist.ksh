@@ -4,8 +4,9 @@
 sleep_time=600
 emails="example@email.com,example2@email.com"
 debug_emails="example@email.com"
-#emails=$debug_emails
-worldname="The Land of Cheese and Syrup"
+from_emails="from@email.com"
+message="message text"
+signature="signature"
 ip_savefile=$PWD/last_good_ip.dat
 emails_file=$PWD/alert_email_recipients.dat
 
@@ -105,24 +106,24 @@ fi
 if [ "$debug_messages" = "on" ]; then
 print Sending out the following message to $emails :
 print ''
-print From: terrariaserverstatusgremlin@gmail.com
-print Subject: $worldname has an update
+print From: $from_email
+print $message
 print ''
 print The new address is $current_ip
 print ''
-print - - $worldname
+print - - $signature
 print ''
 else
 print sending an email out
 fi
 
 sendmail $emails <<EOF
-From: terrariaserverstatusgremlin@gmail.com
-Subject: $worldname has an update
+From: $from_email
+$message
 
 The new address is $current_ip
 
-- $worldname
+- $signature
 EOF
 }
 
