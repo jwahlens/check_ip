@@ -8,7 +8,12 @@ from_emails="from@email.com"
 message="message text"
 signature="signature"
 ip_savefile=$PWD/last_good_ip.dat
-emails_file=$PWD/alert_email_recipients.dat
+emails_file=$PWD/alert_email_recipients.txt
+config_file=$PWD/config.txt
+
+if [[ -e "$config_file" ]]; then
+  source $config_file
+fi
 
 # Set to "on" for debug
 debug_messages="off"
