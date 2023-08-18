@@ -1,14 +1,21 @@
 #!/bin/ksh
 
-# Set the polling rate, email list and world name.
+# Set the polling rate, email list and message.
 sleep_time=600
 emails="example@email.com,example2@email.com"
 debug_emails="example@email.com"
 from_emails="from@email.com"
 message="message text"
 signature="signature"
+
+# The IP is saved here to persist accross restarts
 ip_savefile=$PWD/last_good_ip.dat
+
+# You can add emails to this file as a comma seperated list to change them on the fly.
+# If the file exists, that will be used, otherwise it will use $emails.
 emails_file=$PWD/alert_email_recipients.txt
+
+# This config file will be sourced if it exists. It can be used to override the defaults above.
 config_file=$PWD/config.txt
 
 if [[ -e "$config_file" ]]; then
